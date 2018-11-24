@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="CommentModel">
+ 
+   <select id="commentCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM comment
+    </select>
+    
+    <select id="commentList" resultType="com.bit.bnb.host.model.CommentModel" 
+    						parameterType="com.bit.bnb.host.model.CommentModel">
+        SELECT
+            *
+        FROM comment where bId=#{bId}
+    </select>
+    
+    
+    <insert id="commentInsert" parameterType="com.bit.bnb.host.model.CommentModel">
+        INSERT INTO
+        comment (bId, content, writer, reg_date)
+        VALUES(#{bId},#{content},#{writer},now()) 
+    </insert>
+    
+    <update id="commentUpdate" parameterType="com.bit.bnb.host.model.CommentModel">
+        UPDATE comment
+            SET
+            CONTENT = #{content}
+        WHERE CNO = #{cno}
+    </update>
+    
+    <delete id="commentDelete" parameterType="int">
+        DELETE FROM comment WHERE CNO = #{cno}
+    </delete>
+</mapper>
+ 
+

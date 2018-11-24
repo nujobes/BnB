@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hostModel">
+	<!--hostModel으로 받아와야 hostModel에서 listAll을 갖고 올수 있기에 dao가 아닌 model로 설정해야함 -->
+
+
+	<!-- 데이터 뿌리기 -->
+
+
+
+	<insert parameterType="com.bit.bnb.host.model.HostModel"
+		id="create">
+		INSERT INTO `host` (`bUserId`, `bTitle`, `bContent`, `bDate`)VALUES
+		(#{bUserId},#{bTitle},#{bContent},now())
+	</insert>
+
+	<select id="listAll"
+		parameterType="com.bit.bnb.host.model.HostModel"
+		resultType="com.bit.bnb.host.model.HostModel">
+		select * from host order by bId DESC 
+	</select>
+	<!--parameterType은 값을 검색, resultType은 이걸로 값을 받아오는것 -->
+
+	<select id="read" resultType="com.bit.bnb.host.model.HostModel">
+		select * from host where bId =
+		#{bId}
+	</select>
+
+	<delete id="delete">
+		delete from host where bId = #{bId} 
+	</delete>
+
+	<update id="update">
+		update host set bTitle=#{bTitle}, bContent=#{bContent},bUserId=#{bUserId} where bId=#{bId}
+	</update>
+
+</mapper>
+
+ 
+        
